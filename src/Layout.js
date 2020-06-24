@@ -5,8 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 const Layout = (props) => {
     return(
-        <div>
-            <BrowserRouter>
+        <div style={{"background-color":"#fafafa"}}>
+            <BrowserRouter >
                 <AppBar
                     logoutHandler = {props.logoutHandler}
                 />

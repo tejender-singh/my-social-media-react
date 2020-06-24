@@ -119,7 +119,7 @@ export default function PrimarySearchAppBar(inputProps) {
 
   return (
     <div className={classes.grow}>
-      <AppBar className={classes.appBar} position="static">
+      <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             MySocialMedia
