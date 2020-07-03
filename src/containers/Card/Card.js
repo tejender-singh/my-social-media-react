@@ -13,6 +13,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import SendIcon from '@material-ui/icons/Send';
 import ChatBubbleOutlineIcon from '@material-ui/icons/ChatBubbleOutline';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import appConfig from '../../appConfig'
 
 
 const useStyles = makeStyles({
@@ -34,6 +35,7 @@ const useStyles = makeStyles({
   },
   header: {
     padding: 10,
+    textAlign:'inherit'
   },
   title: {
     fontSize: '0.875em',
@@ -43,6 +45,7 @@ const useStyles = makeStyles({
   line:{
     display: 'inline-block',
     padding:'10',
+    textAlign:'inherit'
   },    
   caption:{
     textAlign:'left',
@@ -81,7 +84,7 @@ export default function OutlinedCard() {
         className={classes.header}
         avatar={
             <div className={classes.line}>
-                <Avatar alt="Remy Sharp" src="http://localhost:8080/MySocialMedia/images/dp.jpg" />
+                <Avatar alt="Remy Sharp" src={appConfig.serverURL+"/images/dp.jpg"} />
           </div>
         }
         action={
@@ -100,7 +103,7 @@ export default function OutlinedCard() {
 
         <CardMedia
         className={classes.media}
-        image="http://localhost:8080/MySocialMedia/images/dog.jpg"
+        image={appConfig.serverURL+"/images/dog.jpg"}
         />
       </CardContent>
       <CardActions className={classes.actions} disableSpacing>

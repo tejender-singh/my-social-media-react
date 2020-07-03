@@ -15,7 +15,9 @@ import SendIcon from '@material-ui/icons/Send';
 import ExploreIcon from '@material-ui/icons/ExploreOutlined';
 import FavoriteIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import { Link, BrowserRouter } from 'react-router-dom';
-
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import ImageUploader from '../Utility/ImageUploader';
 const useStyles = makeStyles((theme) => ({
   link:{
     backgroundColor:'#fff',
@@ -87,6 +89,15 @@ export default function PrimarySearchAppBar(inputProps) {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -121,7 +132,7 @@ export default function PrimarySearchAppBar(inputProps) {
     <div className={classes.grow}>
       <AppBar className={classes.appBar} position="fixed">
         <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} variant="h6" noWrap  onClick={handleClickOpen}>
             MySocialMedia
           </Typography>
           <div className={classes.search}>
@@ -162,7 +173,17 @@ export default function PrimarySearchAppBar(inputProps) {
         </div>
         </Toolbar>
       </AppBar>
+
+      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+        <ImageUploader/>
+      </Dialog>
+
+
       {renderMenu}
     </div>
   );
 }
+
+
+
+      

@@ -1,9 +1,8 @@
 import React from 'react';
 import Card from '../Card/Card';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
+import HomeRightPanel from './HomeRightPanel'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -37,7 +36,7 @@ export default function HomePage() {
             </div>
           </Grid>
           <Grid item xs={5}>
-          <Paper style={{'position':'fixed', 'width':'35%'}} className={classes.paper}>xs=6</Paper>
+            <HomeRightPanel  className={classes.paper}/>
           </Grid>
         </Grid>
         <div>

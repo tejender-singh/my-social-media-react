@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import LoginForm from './containers/Login/LoginForm'
 import Layout from './Layout';
+import appConfig from './appConfig'
 
 const welcomeText = "Welcome, Please Sign in"
 class App extends Component {
@@ -15,12 +16,13 @@ class App extends Component {
       pageLoaded:false,
       text: welcomeText,
       loginDisabled:true,
-      errorMessage:null
+      errorMessage:null,
+      isLoading:false
     },
   }
 
   componentDidMount(){
-    axios.get('http://localhost:8080/MySocialMedia/Login')
+    axios.get(appConfig.serverURL+'/Login')
       .then((response) => {
         this.handleServerResponse(response, welcomeText);
       })
@@ -42,7 +44,8 @@ class App extends Component {
         loggedIn:loggedInVal,
         errorMessage:error,
         text:textVal,
-        pageLoaded:true
+        pageLoaded:true,
+        isLoading:false
       }
     })
 
@@ -51,20 +54,28 @@ class App extends Component {
   }
 
   loginHandler = () => {
+    console.log('start login Handler');
+    console.log(this.state);
+
     this.setState({
       stateObj:{
         ...this.state.stateObj,
-        text:"loading"
+        text:"loading",
+        isLoading:true
       }
-    });
-    var parameters= {
-      username:this.state.stateObj.username,
-      password:this.state.stateObj.password
-    }    
-      axios.post('http://localhost:8080/MySocialMedia/Login',null,{ params:parameters})
-      .then((response) => {
-        this.handleServerResponse(response,"Username and Password Don't match");
-      })
+    }, () => {
+      console.log('login Handler 2');
+      console.log(this.state);
+      var parameters= {
+        username:this.state.stateObj.username,
+        password:this.state.stateObj.password
+      }    
+        axios.post(appConfig.serverURL+'/Login',null,{ params:parameters})
+        .then((response) => {
+          this.handleServerResponse(response,"Username and Password Don't match");
+        })
+      });
+
     
   }
 
@@ -75,13 +86,15 @@ class App extends Component {
         username:"",
         password:"",
         pageLoaded:false,
+        isLoading:false
       }
-    });
-
-      axios.get('http://localhost:8080/MySocialMedia/Logout')
+    }, ()=>{
+      axios.get(appConfig.serverURL+'/Logout')
       .then((response) => {
         this.handleServerResponse(response,welcomeText);
       })
+    });
+
     
   }
 
@@ -144,6 +157,7 @@ class App extends Component {
                   password={this.state.stateObj.password}
                   logoutHandler={this.logoutHandler}
                   loginHandler={this.loginHandler}
+                  isLoading={this.state.stateObj.isLoading}
                   passwordChangeHandler={this.passwordChangeHandler}
                   usernameChangeHandler={this.usernameChangeHandler}
                   loginDisabled={this.state.stateObj.loginDisabled}

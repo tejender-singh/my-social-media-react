@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import { CardContent } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import { red } from '@material-ui/core/colors';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 function Copyright() {
     return (
@@ -70,7 +71,7 @@ function Copyright() {
       <CardContent>
         <CssBaseline />
         <div className={classes.paper}>
-          <img height="50px" width="50px" src="../logo512.png"></img>
+          {props.isLoading ? <CircularProgress /> : <img height="50px" width="50px" src="../logo512.png"/>}          
             <TextField
               variant="outlined"
               margin="normal"
